@@ -1,0 +1,19 @@
+query Product($id: ID = "") {
+  product(where: { id: $id }) {
+    name
+    price
+    variants {
+      ... on ProductColorVariant {
+        name
+        color
+      }
+      ... on ProductSizeVariant {
+        name
+        size
+      }
+    }
+    images {
+      url
+    }
+  }
+}

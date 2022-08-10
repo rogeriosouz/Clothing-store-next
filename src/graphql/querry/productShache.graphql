@@ -1,0 +1,10 @@
+query Search($_search: String = "mug") {
+  products(where: { _search: $_search }) {
+    id
+    name
+    images {
+      url
+    }
+    price
+  }
+}
