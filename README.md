@@ -8,8 +8,9 @@
  <img width="800"  height="450" src="https://user-images.githubusercontent.com/76504596/183800143-b33bb517-74c6-4838-ae71-83fd7a154474.png"> 
 </p>
 
-</div>
-
+<div></div>
+ 
+ 
 <h2 align="center">MOBILE</h2>
 
 <p align="center">
@@ -26,7 +27,7 @@
    .  SSR - Next
    .  SSG - Next
 ```
-<h2>Clone Project</h2>
+<h2 align="center">Clone Project</h2>
 
 ```bash
   # Clone the repository
