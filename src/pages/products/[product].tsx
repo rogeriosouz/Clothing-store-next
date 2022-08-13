@@ -13,7 +13,7 @@ export default function Product({ id }: any) {
     <section className="w-full h-screen mt-[150px]">
       <div className="max-w-[1100px] h-screen m-auto flex flex-col p-5">
         <div className="flex">
-          <div className="hidden sm:flex border-[2px] shadow-lg shadow-zinc-200 p-2 flex-1 w-full h-[500px] mr-[20px] bg-white rounded">
+          <div className="hidden sm:flex border border-black shadow-xl shadow-zinc-200 p-2 flex-1 w-full h-[500px] mr-[20px] bg-white rounded">
             <div className="rounded overflow-hidden w-[150px] m-auto mt-[10px]">
               <img
                 className="w-full h-full"
@@ -22,7 +22,7 @@ export default function Product({ id }: any) {
               />
             </div>
           </div>
-          <div className="border-[2px] shadow-lg shadow-zinc-200 flex-2 w-full h-[500px] rounded overflow-hidden bg-white">
+          <div className="border border-black  shadow-xl shadow-zinc-200 flex-2 w-full h-[500px] rounded overflow-hidden bg-white">
             <img
               className="w-full h-full object-contain"
               src={data?.product?.images[0].url}
@@ -30,7 +30,7 @@ export default function Product({ id }: any) {
             />
           </div>
         </div>
-        <div className="border-[2px] shadow-lg shadow-zinc-200 bg-white h-[101px] mt-[20px] w-full rounded flex flex-col items-center justify-between">
+        <div className="border border-black  shadow-xl shadow-zinc-200 bg-white h-[101px] mt-[20px] w-full rounded flex flex-col items-center justify-between">
           <span
             className="mt-[15px] text-[14px] mb-[20px] font-medium"
             style={{

@@ -45,7 +45,7 @@ export function MenuMobile({ menuMobile, setMenuMobile }: MenuMobileProps) {
               letterSpacing: '0.300em',
             }}
             onClick={() => setMenuCategory(!menuCategory)}
-            className="w-full border-[2px] p-1 pl-3 rounded flex items-center justify-center cursor-pointer"
+            className="w-full shadow-xl p-1 pl-3 rounded flex items-center justify-center cursor-pointer"
           >
             categorias
             {menuCategory ? (

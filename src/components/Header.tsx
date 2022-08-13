@@ -1,10 +1,12 @@
 import classNames from 'classnames';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 import { DiDojo } from 'react-icons/di';
 import { GoThreeBars, GoX } from 'react-icons/go';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
+import { Context } from '../context/Carinho';
 import { useCategoriesQuery } from '../generated/graphql';
 import { MenuMobile } from './MenuMobile';
 import { Search } from './Search';
@@ -12,6 +14,7 @@ import { Search } from './Search';
 export function Header() {
   const [menuMobile, setMenuMobile] = useState(false);
   const [category, setCategory] = useState(false);
+  const { cart } = useContext(Context);
 
   const [{ data }] = useCategoriesQuery();
 
@@ -23,11 +26,22 @@ export function Header() {
         })}
       >
         <div className="max-w-[1100px] m-auto h-full flex flex-col">
-          <Link href={'/'}>
-            <div className="cursor-pointer w-full flex items-center justify-center mt-[20px] mb-[20px] h-[40px]">
-              <DiDojo fontSize={50} />
+          <div className="w-full flex items-center justify-between mt-[20px] mb-[20px] h-[40px] p-2">
+            <div></div>
+            <div className="cursor-pointer">
+              <Link href={'/'}>
+                <DiDojo fontSize={50} />
+              </Link>
             </div>
-          </Link>
+            <div className=" cursor-pointer">
+              <Link href={'/carinho'}>
+                <div className="flex gap-2">
+                  <AiOutlineShoppingCart fontSize={25} />
+                  {cart.length}
+                </div>
+              </Link>
+            </div>
+          </div>
           <div className="w-full flex items-center justify-between h-[40px] p-2">
             <div
               style={{
@@ -99,6 +113,7 @@ export function Header() {
                 <GoThreeBars fontSize={30} />
               )}
             </button>
+
             <Search />
           </div>
         </div>
