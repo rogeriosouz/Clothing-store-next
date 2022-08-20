@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { useContext } from 'react';
+import { ContextCart } from '../context/Carinho';
 
 type ProductProps = {
   name: string;
@@ -8,8 +10,10 @@ type ProductProps = {
 };
 
 export function Product({ name, price, imgSrc, id }: ProductProps) {
+  const { handleAddItemToCart } = useContext(ContextCart);
+
   return (
-    <div className="shadow-2xl m-auto w-[266px] min-h-[416px] rounded-[17px] bg-zinc-100 border border-zinc-300">
+    <div className=" shadow-2xl m-auto w-[266px] min-h-[416px] rounded-[17px] bg-zinc-100 border border-zinc-300">
       <div className="w-full h-[319px] rounded-[17px] overflow-hidden bg-white">
         <img className="object-fill w-full h-full" src={imgSrc} alt="aa" />
       </div>
@@ -24,14 +28,22 @@ export function Product({ name, price, imgSrc, id }: ProductProps) {
             {name}
           </span>
         </Link>
-        <p
-          className="font-bold text-[15px]"
-          style={{
-            letterSpacing: '0.345em',
-          }}
-        >
-          R$:{price}
-        </p>
+        <div className="relative flex items-centerl w-full justify-center">
+          <p
+            className="font-bold text-[15px]"
+            style={{
+              letterSpacing: '0.345em',
+            }}
+          >
+            R$:{price}
+          </p>
+          <button
+            onClick={() => handleAddItemToCart({ name, imgSrc, price, id })}
+            className="cursor-pointer text-[30px] absolute left-[85%]"
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
   );

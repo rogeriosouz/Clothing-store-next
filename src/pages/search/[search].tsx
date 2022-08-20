@@ -13,17 +13,30 @@ export default function Sacher({ search }: any) {
   return (
     <section className="w-full min-h-screen mt-[190px]">
       <div className="max-w-[1100px] min-h-screen m-auto">
-        <div className="gap-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
-          {data?.products.map((product) => (
-            <Product
-              key={product.name}
-              price={product.price}
-              name={product.name}
-              imgSrc={product.images[0].url}
-              id={product.id}
-            />
-          ))}
-        </div>
+        {data?.products.length ? (
+          <>
+            <div className="gap-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
+              {data.products?.map((product) => (
+                <Product
+                  key={product.name}
+                  price={product.price}
+                  name={product.name}
+                  imgSrc={product.images[0].url}
+                  id={product.id}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div
+            style={{
+              letterSpacing: '0.345em',
+            }}
+            className="text-xl h-screen flex items-center justify-center"
+          >
+            produto não encontrado
+          </div>
+        )}
       </div>
     </section>
   );

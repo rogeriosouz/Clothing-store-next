@@ -1,4 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { useContext } from 'react';
+import { ContextCart } from '../../context/Carinho';
 import { ProductDocument, useProductQuery } from '../../generated/graphql';
 import { client, ssrCache } from '../../lib/urql';
 
@@ -8,6 +10,7 @@ export default function Product({ id }: any) {
       id,
     },
   });
+  const { handleAddItemToCart } = useContext(ContextCart);
 
   return (
     <section className="w-full h-screen mt-[150px]">
@@ -30,7 +33,7 @@ export default function Product({ id }: any) {
             />
           </div>
         </div>
-        <div className="border border-black  shadow-xl shadow-zinc-200 bg-white h-[101px] mt-[20px] w-full rounded flex flex-col items-center justify-between">
+        <div className="relative border border-black  shadow-xl shadow-zinc-200 bg-white h-[101px] mt-[20px] w-full rounded flex flex-col items-center justify-between">
           <span
             className="mt-[15px] text-[14px] mb-[20px] font-medium"
             style={{
@@ -47,6 +50,19 @@ export default function Product({ id }: any) {
           >
             R$:{data?.product?.price}
           </p>
+
+          <button
+            onClick={() => {
+              handleAddItemToCart({
+                name: data?.product?.name,
+                price: data?.product?.price,
+                imgSrc: data?.product?.images[0].url,
+              });
+            }}
+            className="cursor-pointer text-[30px] absolute left-[85%] top-[25%]"
+          >
+            +
+          </button>
         </div>
       </div>
     </section>

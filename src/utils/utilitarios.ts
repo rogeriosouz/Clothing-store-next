@@ -19,3 +19,14 @@ export function randomList(min: number, max: number) {
     }
   }
 }
+
+export function odenarMenor_Maior(list: any) {
+  const odemList = list.sort((a: any, b: any) => a.price - b.price);
+  return odemList;
+}
+
+export function odenarMaior_Menor(list: any) {
+  const lista = list.sort((a: any, b: any) => a.price - b.price);
+  const ordemList = lista.reverse();
+  return ordemList;
+}

@@ -7,18 +7,25 @@ type ContextProps = {
   clearCart: any;
 };
 
-export const Context = createContext<ContextProps>({
+export const ContextCart = createContext<ContextProps>({
   cart: [],
   handleAddItemToCart: () => {},
   handleRemoveItemFromCart: () => {},
   clearCart: () => {},
 });
 
-export function CarinhoProvider({ children }: any) {
+type AddPRoductProps = {
+  name: string;
+  price: number;
+  imgSrc: string;
+  id: string;
+};
+
+export function CartContext({ children }: any) {
   const [cart, setCart] = useState<object[]>([]);
 
-  function handleAddItemToCart(name: string, price: number, imgSrc: string) {
-    const itemObject = { name, price, imgSrc };
+  function handleAddItemToCart({ name, price, imgSrc, id }: AddPRoductProps) {
+    const itemObject = { name, price, imgSrc, id };
     setCart([...cart, itemObject]);
   }
 
@@ -34,10 +41,10 @@ export function CarinhoProvider({ children }: any) {
   }
 
   return (
-    <Context.Provider
+    <ContextCart.Provider
       value={{ cart, clearCart, handleAddItemToCart, handleRemoveItemFromCart }}
     >
       {children}
-    </Context.Provider>
+    </ContextCart.Provider>
   );
 }

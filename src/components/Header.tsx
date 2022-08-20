@@ -6,7 +6,7 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { DiDojo } from 'react-icons/di';
 import { GoThreeBars, GoX } from 'react-icons/go';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
-import { Context } from '../context/Carinho';
+import { ContextCart } from '../context/Carinho';
 import { useCategoriesQuery } from '../generated/graphql';
 import { MenuMobile } from './MenuMobile';
 import { Search } from './Search';
@@ -14,7 +14,7 @@ import { Search } from './Search';
 export function Header() {
   const [menuMobile, setMenuMobile] = useState(false);
   const [category, setCategory] = useState(false);
-  const { cart } = useContext(Context);
+  const { cart } = useContext(ContextCart);
 
   const [{ data }] = useCategoriesQuery();
 
@@ -34,7 +34,7 @@ export function Header() {
               </Link>
             </div>
             <div className=" cursor-pointer">
-              <Link href={'/carinho'}>
+              <Link href={'/cart'}>
                 <div className="flex gap-2">
                   <AiOutlineShoppingCart fontSize={25} />
                   {cart.length}
@@ -93,7 +93,7 @@ export function Header() {
                           style={{
                             letterSpacing: '0.345em',
                           }}
-                          className="hover:bg-zinc-300 transition-colors text-[14px] mt-[12px] font-medium cursor-pointer  w-full text-center p-1"
+                          className="p-3 rounded hover:bg-zinc-200 hover:text-zinc-500 transition-colors text-[14px] mt-[12px] font-medium cursor-pointer  w-full text-center"
                         >
                           {categore.name}
                         </p>
