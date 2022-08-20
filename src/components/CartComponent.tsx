@@ -21,7 +21,7 @@ export function CartComponent({
   const { handleRemoveItemFromCart } = useContext(ContextCart);
 
   return (
-    <div className="relative w-[450px] h-[83px] m-auto rounded shadow-2xl border border-black flex items-center justify-between">
+    <div className="relative w-[100%] h-[83px] m-auto rounded shadow-2xl border border-black flex items-center justify-between">
       <Link href={`/products/${id}`}>
         <div className="cursor-pointer w-[119px] overflow-hidden h-full rounded bg-white">
           <img className="w-full h-full object-cover" src={urlImg} alt={name} />
@@ -48,7 +48,10 @@ export function CartComponent({
         </span>
         <button
           onClick={() => handleRemoveItemFromCart(index)}
-          className="absolute top-[37%] left-[94%]"
+          className="absolute top-[37%]"
+          style={{
+            left: 'calc(100% - 30px)',
+          }}
         >
           <MdRemoveCircle fontSize={20} />
         </button>
