@@ -26,14 +26,13 @@ export function Header() {
         })}
       >
         <div className="max-w-[1100px] m-auto h-full flex flex-col">
-          <div className="w-full flex items-center justify-between mt-[20px] mb-[20px] h-[40px] p-2">
-            <div></div>
+          <div className="w-full flex items-center justify-center relative mt-[20px] mb-[20px] h-[40px] p-2">
             <div className="cursor-pointer">
               <Link href={'/'}>
                 <DiDojo fontSize={50} />
               </Link>
             </div>
-            <div className=" cursor-pointer">
+            <div className="cursor-pointer absolute left-[84%]">
               <Link href={'/cart'}>
                 <div className="flex gap-2">
                   <AiOutlineShoppingCart fontSize={25} />
