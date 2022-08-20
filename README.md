@@ -1,34 +1,23 @@
 <h1 align="center">PROJECT CLOTHING-STORE-NEXT</h1>
-<<<<<<< HEAD
-
-<h2 align="center">DESKTOP</h2>
-
-=======
 
 
 <h2 align="center">DESKTOP</h2>
 
 
->>>>>>> 3819fb933bdd0f328c77c86ea27904d0648bd7b1
 <p align="center">
- <img width="800"  height="450" src="https://user-images.githubusercontent.com/76504596/183800143-b33bb517-74c6-4838-ae71-83fd7a154474.png"> 
+ <img width="800"  height="450" src="https://user-images.githubusercontent.com/76504596/185729530-b9bc4345-4367-456d-a6a9-5f695b80e00a.png"> 
 </p>
 
 <h2 align="center">MOBILE</h2>
 
 <p align="center">
-  <img width="360"  height="550" src="https://user-images.githubusercontent.com/76504596/183801691-1b0de0b0-adf9-4fd2-9c9c-66715b3fc007.png">
+  <img width="350"  height="550" src="https://user-images.githubusercontent.com/76504596/185729539-c5cae107-4981-4d8e-bd95-47749f71dce7.png">
 </p>
 
-<<<<<<< HEAD
-**🛠️ BUILT WITH**
-
-=======
-
 
 **🛠️ BUILT WITH**
 
->>>>>>> 3819fb933bdd0f328c77c86ea27904d0648bd7b1
+
 ```bash
    .  Next ts
    .  Api hygraph Graphql
