@@ -13,57 +13,48 @@ export default function Product({ id }: any) {
   const { handleAddItemToCart } = useContext(ContextCart);
 
   return (
-    <section className="w-full h-screen mt-[150px]">
-      <div className="max-w-[1100px] h-screen m-auto flex flex-col p-5">
-        <div className="flex">
-          <div className="hidden sm:flex border border-black shadow-xl shadow-zinc-200 p-2 flex-1 w-full h-[500px] mr-[20px] bg-white rounded">
-            <div className="rounded overflow-hidden w-[150px] m-auto mt-[10px]">
-              <img
-                className="w-full h-full"
-                src={data?.product?.images[0].url}
-                alt={data?.product?.images[0].__typename}
-              />
-            </div>
-          </div>
-          <div className="border border-black  shadow-xl shadow-zinc-200 flex-2 w-full h-[500px] rounded overflow-hidden bg-white">
+    <section className="max-w-[1200px] h-screen flex items-start mt-[200px] m-auto gap-10">
+      <div className="w-[680px] h-[480px] flex gap-3">
+        <div className="w-[170px] h-full shadow-xl">
+          <div className="overflow-hidden w-full h-[150px] mt-[10px] mb-[10px] bg-white">
             <img
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover"
               src={data?.product?.images[0].url}
               alt={data?.product?.images[0].__typename}
             />
           </div>
         </div>
-        <div className="relative border border-black  shadow-xl shadow-zinc-200 bg-white h-[101px] mt-[20px] w-full rounded flex flex-col items-center justify-between">
-          <span
-            className="mt-[15px] text-[14px] mb-[20px] font-medium"
-            style={{
-              letterSpacing: '0.345em',
-            }}
-          >
-            {data?.product?.name}
-          </span>
-          <p
-            className="font-bold text-[15px] mb-[20px]"
-            style={{
-              letterSpacing: '0.345em',
-            }}
-          >
-            R$:{data?.product?.price}
-          </p>
-
-          <button
-            onClick={() => {
-              handleAddItemToCart({
-                name: data?.product?.name,
-                price: data?.product?.price,
-                imgSrc: data?.product?.images[0].url,
-              });
-            }}
-            className="cursor-pointer text-[30px] absolute left-[85%] top-[25%]"
-          >
-            +
-          </button>
+        <div className="flex-1 h-full shadow-xl">
+          <img
+            className="w-full h-full object-cover"
+            src={data?.product?.images[0].url}
+            alt={data?.product?.images[0].__typename}
+          />
         </div>
+      </div>
+      <div className="w-[480px] h-[250px]  flex flex-col justify-between">
+        <h1 className="text-center mt-[20px] font-bold text-2xl">
+          {data?.product?.name}
+        </h1>
+        <div className="ml-[20px] flex items-center gap-2">
+          <span className="mb-[3px] font-bold flex items-center text-lg">
+            R${data?.product?.price}
+          </span>
+          <p className="text-[12px] font-semibold text-zinc-400"> x3 20,80</p>
+        </div>
+        <button
+          onClick={() => {
+            handleAddItemToCart({
+              name: data?.product?.name,
+              price: data?.product?.price,
+              imgSrc: data?.product?.images[0].url,
+              id: id,
+            });
+          }}
+          className="w-full h-[60px] bg-black text-white font-bold"
+        >
+          ADD CART
+        </button>
       </div>
     </section>
   );

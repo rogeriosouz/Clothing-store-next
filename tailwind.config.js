@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'Mulish': ['Mulish'],
+    },
     screens: {
       'cell': '450px',
       'sm': '640px',

@@ -64,20 +64,22 @@ export function MenuMobile({ menuMobile, setMenuMobile }: MenuMobileProps) {
             )}
           >
             {data?.categories.map((categoria) => (
-              <Link key={categoria.id} href={`/category/${categoria.id}`}>
-                <p
-                  onClick={() => {
-                    setMenuMobile(false);
-                    setMenuCategory(false);
-                  }}
-                  style={{
-                    letterSpacing: '0.345em',
-                  }}
-                  className="hover:bg-zinc-300 transition-colors text-[14px] mt-[12px] font-medium cursor-pointer  w-full text-center p-2"
-                >
-                  {categoria.name}
-                </p>
-              </Link>
+              <div key={categoria.id}>
+                <Link href={`/category/${categoria.id}`}>
+                  <p
+                    onClick={() => {
+                      setMenuMobile(false);
+                      setMenuCategory(false);
+                    }}
+                    style={{
+                      letterSpacing: '0.345em',
+                    }}
+                    className="hover:bg-zinc-300 transition-colors text-[14px] mt-[12px] font-medium cursor-pointer  w-full text-center p-2"
+                  >
+                    {categoria.name}
+                  </p>
+                </Link>
+              </div>
             ))}
           </div>
         </div>

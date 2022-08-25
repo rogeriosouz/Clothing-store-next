@@ -25,11 +25,13 @@ export function Header() {
           'border-b': !menuMobile,
         })}
       >
-        <div className="max-w-[1100px] m-auto h-full flex flex-col">
+        <div className="max-w-[1200px] m-auto h-full flex flex-col">
           <div className="w-full flex items-center justify-center relative mt-[20px] mb-[20px] h-[40px] p-2">
             <div className="cursor-pointer">
               <Link href={'/'}>
-                <DiDojo fontSize={50} />
+                <a>
+                  <DiDojo fontSize={50} />
+                </a>
               </Link>
             </div>
             <div className="cursor-pointer absolute left-[84%]">
@@ -42,61 +44,53 @@ export function Header() {
             </div>
           </div>
           <div className="w-full flex items-center justify-between h-[40px] p-2">
-            <div
-              style={{
-                letterSpacing: '0.345em',
-              }}
-              className="font-medium text-[15px] gap-3 hidden sm:flex items-center"
-            >
+            <div className="font-medium text-[15px] gap-10 hidden sm:flex items-center">
               <Link href={'/products'}>
-                <p className="h-[34px] flex items-center text-base cursor-pointer">
+                <p className="transition-colors p-4 pl-5 pr-5 hover:bg-zinc-600 hover:text-white h-[34px] flex items-center font-medium text-xl cursor-pointer">
                   todos produtos
                 </p>
               </Link>
 
               <div className="relative z-10">
                 <button
-                  style={{
-                    letterSpacing: '0.200em',
-                  }}
                   onClick={() => setCategory(!category)}
                   className={classNames(
-                    'border-r border-black z-10 relative top-[1px] border-l-[1px] border-t font-medium text-[15px] w-[150px] pl-[11px] bg-zinc-100  rounded-t flex items-center text-base cursor-pointer',
+                    'border-black z-10 relative top-[1px] font-medium text-xl w-[150px] pl-[11px] bg-zinc-100 flex items-center cursor-pointer',
                     {
-                      'border-b rounded': !category,
+                      'border-b': !category,
                     }
                   )}
                 >
                   categorias
-                  {category ? (
-                    <MdOutlineArrowDropUp fontSize={30} />
-                  ) : (
-                    <MdOutlineArrowDropDown fontSize={30} />
-                  )}
+                  <div className="ml-[10px]">
+                    {category ? (
+                      <MdOutlineArrowDropUp fontSize={30} />
+                    ) : (
+                      <MdOutlineArrowDropDown fontSize={30} />
+                    )}
+                  </div>
                 </button>
                 <div
                   className={classNames(
-                    'overflow-hidden z-2 border-black border-t  border-b rounded-r rounded-b-lg flex flex-col absolute left-0 w-[300px] top-[100%] bg-zinc-100  border-r border-l',
+                    'overflow-hidden z-2 border-black flex flex-col absolute left-0 w-[300px] top-[100%] bg-zinc-100',
                     {
-                      'h-[0px] border-b-[0px] border-t-[0px] border-white':
-                        !category,
+                      'h-[0px] border-white': !category,
                       'min-h-full': category,
                     }
                   )}
                 >
                   <div className="w-full z-0 flex flex-col gap-3 text-black p-2 ">
                     {data?.categories.map((categore) => (
-                      <Link href={`/category/${categore.id}`} key={categore.id}>
-                        <p
-                          onClick={() => setCategory(false)}
-                          style={{
-                            letterSpacing: '0.345em',
-                          }}
-                          className="p-3 rounded hover:bg-zinc-200 hover:text-zinc-500 transition-colors text-[14px] mt-[12px] font-medium cursor-pointer  w-full text-center"
-                        >
-                          {categore.name}
-                        </p>
-                      </Link>
+                      <div key={categore.id}>
+                        <Link href={`/category/${categore.id}`}>
+                          <p
+                            onClick={() => setCategory(false)}
+                            className="font-bold p-3 rounded hover:bg-zinc-300 hover:text-zinc-500 transition-colors text-[14px] mt-[12px] cursor-pointer  w-full text-center"
+                          >
+                            {categore.name}
+                          </p>
+                        </Link>
+                      </div>
                     ))}
                   </div>
                 </div>

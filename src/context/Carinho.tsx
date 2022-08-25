@@ -5,14 +5,10 @@ type ContextProps = {
   handleAddItemToCart: any;
   handleRemoveItemFromCart: any;
   clearCart: any;
+  isIqualProduct: boolean;
 };
 
-export const ContextCart = createContext<ContextProps>({
-  cart: [],
-  handleAddItemToCart: () => {},
-  handleRemoveItemFromCart: () => {},
-  clearCart: () => {},
-});
+export const ContextCart = createContext({} as ContextProps);
 
 type AddPRoductProps = {
   name: string;
@@ -21,12 +17,27 @@ type AddPRoductProps = {
   id: string;
 };
 
+function isIqualItem(obj1: object, obj2: object) {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
+
 export function CartContext({ children }: any) {
   const [cart, setCart] = useState<object[]>([]);
+  const [isIqualProduct, setIsIQualProduct] = useState(false);
 
   function handleAddItemToCart({ name, price, imgSrc, id }: AddPRoductProps) {
     const itemObject = { name, price, imgSrc, id };
-    setCart([...cart, itemObject]);
+
+    cart.map((item) => {
+      if (isIqualItem(item, itemObject)) {
+        setIsIQualProduct(true);
+      }
+    });
+
+    if (!isIqualProduct) {
+      setIsIQualProduct(false);
+      setCart([...cart, itemObject]);
+    }
   }
 
   function handleRemoveItemFromCart(clickedItemIndex: number) {
@@ -42,7 +53,13 @@ export function CartContext({ children }: any) {
 
   return (
     <ContextCart.Provider
-      value={{ cart, clearCart, handleAddItemToCart, handleRemoveItemFromCart }}
+      value={{
+        cart,
+        isIqualProduct,
+        clearCart,
+        handleAddItemToCart,
+        handleRemoveItemFromCart,
+      }}
     >
       {children}
     </ContextCart.Provider>

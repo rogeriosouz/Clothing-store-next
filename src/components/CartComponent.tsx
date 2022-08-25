@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useContext } from 'react';
-import { MdRemoveCircle } from 'react-icons/md';
+import { MdDeleteForever } from 'react-icons/md';
 import { ContextCart } from '../context/Carinho';
 
 type CartComponentsProps = {
@@ -21,41 +21,36 @@ export function CartComponent({
   const { handleRemoveItemFromCart } = useContext(ContextCart);
 
   return (
-    <div className="relative w-[100%] h-[83px] m-auto rounded shadow-2xl border border-black flex items-center justify-between">
+    <div className="relative w-[100%] mb-4 h-[180px] m-auto shadow-2xl flex items-center justify-between">
       <Link href={`/products/${id}`}>
-        <div className="cursor-pointer w-[119px] overflow-hidden h-full rounded bg-white">
+        <div className="cursor-pointer w-[250px] overflow-hidden h-full bg-white">
           <img className="w-full h-full object-cover" src={urlImg} alt={name} />
         </div>
       </Link>
-      <div className="p-9">
+      <span
+        className="absolute top-[20px] font-bold"
+        style={{
+          left: 'calc(100% - 120px)',
+        }}
+      >
+        R$:{price}
+      </span>
+      <div className="w-full items-center justify-center">
         <Link href={`/products/${id}`}>
-          <p
-            style={{
-              letterSpacing: '0.345em',
-            }}
-            className="cursor-pointer font-medium mb-[10px]"
-          >
+          <p className="text-xl cursor-pointer text-center font-semibold mb-[10px]">
             {name}
           </p>
         </Link>
-        <span
-          className="w-full flex font-bold justify-end"
-          style={{
-            letterSpacing: '0.345em',
-          }}
-        >
-          R$:{price}
-        </span>
-        <button
-          onClick={() => handleRemoveItemFromCart(index)}
-          className="absolute top-[37%]"
-          style={{
-            left: 'calc(100% - 30px)',
-          }}
-        >
-          <MdRemoveCircle fontSize={20} />
-        </button>
       </div>
+      <button
+        onClick={() => handleRemoveItemFromCart(index)}
+        className="absolute top-[80%]"
+        style={{
+          left: 'calc(100% - 50px)',
+        }}
+      >
+        <MdDeleteForever fontSize={30} />
+      </button>
     </div>
   );
 }
