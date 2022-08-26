@@ -6,7 +6,7 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { DiDojo } from 'react-icons/di';
 import { GoThreeBars, GoX } from 'react-icons/go';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
-import { ContextCart } from '../context/Carinho';
+import { ContextCartCreate } from '../context/CartContext';
 import { useCategoriesQuery } from '../generated/graphql';
 import { MenuMobile } from './MenuMobile';
 import { Search } from './Search';
@@ -14,7 +14,7 @@ import { Search } from './Search';
 export function Header() {
   const [menuMobile, setMenuMobile] = useState(false);
   const [category, setCategory] = useState(false);
-  const { cart } = useContext(ContextCart);
+  const { cart } = useContext(ContextCartCreate);
 
   const [{ data }] = useCategoriesQuery();
 
@@ -25,7 +25,7 @@ export function Header() {
           'border-b': !menuMobile,
         })}
       >
-        <div className="max-w-[1200px] m-auto h-full flex flex-col">
+        <div className="max-w-[1300px] m-auto h-full flex flex-col">
           <div className="w-full flex items-center justify-center relative mt-[20px] mb-[20px] h-[40px] p-2">
             <div className="cursor-pointer">
               <Link href={'/'}>

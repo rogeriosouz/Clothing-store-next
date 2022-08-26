@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { useContext } from 'react';
-import { MdDeleteForever } from 'react-icons/md';
-import { ContextCart } from '../context/Carinho';
+import { HiMinusSm } from 'react-icons/hi';
+import { IoIosAdd } from 'react-icons/io';
+import { ContextCartCreate } from '../context/CartContext';
 
 type CartComponentsProps = {
   urlImg: string;
@@ -9,6 +10,7 @@ type CartComponentsProps = {
   price: number;
   index: number;
   id: string;
+  quant: number;
 };
 
 export function CartComponent({
@@ -17,13 +19,14 @@ export function CartComponent({
   name,
   index,
   id,
+  quant,
 }: CartComponentsProps) {
-  const { handleRemoveItemFromCart } = useContext(ContextCart);
+  const { addQuantCart, removeQuantCart } = useContext(ContextCartCreate);
 
   return (
     <div className="relative w-[100%] mb-4 h-[180px] m-auto shadow-2xl flex items-center justify-between">
       <Link href={`/products/${id}`}>
-        <div className="cursor-pointer w-[250px] overflow-hidden h-full bg-white">
+        <div className="cursor-pointer w-[250px] overflow-hidden  h-full bg-white">
           <img className="w-full h-full object-cover" src={urlImg} alt={name} />
         </div>
       </Link>
@@ -36,21 +39,34 @@ export function CartComponent({
         R$:{price}
       </span>
       <div className="w-full items-center justify-center">
-        <Link href={`/products/${id}`}>
-          <p className="text-xl cursor-pointer text-center font-semibold mb-[10px]">
-            {name}
-          </p>
-        </Link>
+        <div className="max-w-max">
+          <Link href={`/products/${id}`}>
+            <p className="text-xl cursor-pointer text-left ml-[150px] font-semibold mb-[10px]">
+              {name}
+            </p>
+          </Link>
+        </div>
       </div>
-      <button
-        onClick={() => handleRemoveItemFromCart(index)}
-        className="absolute top-[80%]"
+
+      <div
+        className="absolute top-[80%] flex gap-2 items-center"
         style={{
-          left: 'calc(100% - 50px)',
+          left: 'calc(100% - 125px)',
         }}
       >
-        <MdDeleteForever fontSize={30} />
-      </button>
+        <button className="bg-black rounded" onClick={() => addQuantCart(id)}>
+          <IoIosAdd fontSize={24} color={'#fff'} />
+        </button>
+        <span className="font-bold text-lg"> {quant} </span>
+        <button
+          className="bg-black rounded"
+          onClick={() => {
+            removeQuantCart(id, index);
+          }}
+        >
+          <HiMinusSm fontSize={24} color={'#fff'} />
+        </button>
+      </div>
     </div>
   );
 }

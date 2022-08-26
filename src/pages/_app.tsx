@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Provider } from 'urql';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { CartContext } from '../context/Carinho';
+import { CartContext } from '../context/CartContext';
 import { client, ssrCache } from '../lib/urql';
 import '../styles/global.css';
 

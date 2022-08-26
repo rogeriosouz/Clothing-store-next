@@ -12,7 +12,7 @@ export default function Category({ category }: any) {
 
   return (
     <section className="w-full min-h-screen mt-[190px]">
-      <div className="max-w-[1200px] min-h-screen m-auto">
+      <div className="max-w-[1300px] min-h-screen m-auto">
         <div className="gap-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
           {data?.category?.products.map((product) => (
             <Product

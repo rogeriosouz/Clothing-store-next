@@ -23,7 +23,7 @@ export default function Home({ listFotos }: PropsHome) {
           style={{
             letterSpacing: '0.305em',
           }}
-          className="sm:flex-row gap-6 flex-col sm:text-[16px] max-w-[1200px] h-[10vh] flex m-auto text-base justify-around text-black items-center"
+          className="sm:flex-row gap-6 flex-col sm:text-[16px] max-w-[1300px] h-[10vh] flex m-auto text-base justify-around text-black items-center"
         >
           <div className="flex">
             <div className="sm:max-w-[300px] flex max-w-[400px] items-center justify-center gap-3">
