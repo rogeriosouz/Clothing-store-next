@@ -3,8 +3,9 @@
 <h2 align="center">DESKTOP</h2>
 
 <p align="center">
- <img width="800"  height="450" src="https://user-images.githubusercontent.com/76504596/185729530-b9bc4345-4367-456d-a6a9-5f695b80e00a.png"> 
+ <img width="800"  height="450" src="https://user-images.githubusercontent.com/76504596/187050851-67eb81db-52ab-4a1f-86cc-9d83ef126b73.png"> 
 </p>
+
 
 <h2 align="center">MOBILE</h2>
 
