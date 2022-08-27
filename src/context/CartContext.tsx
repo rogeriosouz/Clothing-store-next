@@ -9,6 +9,7 @@ type ContextProps = {
   removeQuantCart: (id: string, index: number) => void;
   total: number;
   quantityItems: number;
+  editProduct: (id: string, size: string, color: string) => void;
 };
 
 export type CartProps = {
@@ -17,6 +18,8 @@ export type CartProps = {
   imgSrc: string;
   id: string;
   quant?: number;
+  color: string;
+  size: string;
 };
 
 export const ContextCartCreate = createContext({} as ContextProps);
@@ -32,8 +35,8 @@ export function CartContext({ children }: any) {
     quantityItems += item.quant as number;
   });
 
-  function addItemToCart({ name, price, imgSrc, id }: CartProps) {
-    const itemObject = { name, price, imgSrc, id, quant: 1 };
+  function addItemToCart({ name, price, imgSrc, id, size, color }: CartProps) {
+    const itemObject = { name, price, imgSrc, id, quant: 1, size, color };
     setPriceCart(price);
     setCart([...cart, itemObject]);
   }
@@ -57,6 +60,8 @@ export function CartContext({ children }: any) {
           price: item.price + priceCart,
           quant: (item.quant as number) + 1,
           imgSrc: item.imgSrc,
+          size: item.size,
+          color: item.color,
         });
         positionObj = index;
       }
@@ -80,6 +85,8 @@ export function CartContext({ children }: any) {
           price: item.price - priceCart,
           quant: (item.quant as number) - 1,
           imgSrc: item.imgSrc,
+          size: item.size,
+          color: item.color,
         });
         positionObj = index;
       }
@@ -95,6 +102,31 @@ export function CartContext({ children }: any) {
     setCart(newCart);
   }
 
+  function editProduct(id: string, size: string, color: string) {
+    let newsItems = [] as CartProps[];
+    let positionObj: number = 0;
+
+    cart.map((item, index) => {
+      if (item.id === id) {
+        newsItems.push({
+          name: item.name,
+          id: item.id,
+          price: item.price,
+          quant: item.quant,
+          imgSrc: item.imgSrc,
+          size: size,
+          color: color,
+        });
+        positionObj = index;
+      }
+    });
+
+    cart[positionObj] = newsItems[0];
+    let newCart = [...cart];
+
+    setCart(newCart);
+  }
+
   function clearCart() {
     setCart([]);
   }
@@ -105,6 +137,7 @@ export function CartContext({ children }: any) {
         cart,
         total,
         quantityItems,
+        editProduct,
         addQuantCart,
         removeQuantCart,
         clearCart,

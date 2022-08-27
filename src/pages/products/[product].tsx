@@ -17,7 +17,7 @@ export default function Product({ id }: any) {
     },
   });
 
-  const { addItemToCart, cart } = useContext(ContextCartCreate);
+  const { addItemToCart, cart, editProduct } = useContext(ContextCartCreate);
 
   function isEqualProduct(cart: CartProps[], id: string) {
     let iqual = false;
@@ -129,7 +129,10 @@ export default function Product({ id }: any) {
         {isClick ? (
           <Link href={'/cart'}>
             <a>
-              <button className=" w-full h-[60px] bg-black text-white font-bold ">
+              <button
+                onClick={() => editProduct(id, sizeInput, colorInput)}
+                className=" w-full h-[60px] bg-black text-white font-bold "
+              >
                 IR PARA O CARINHO
               </button>
             </a>
@@ -142,6 +145,8 @@ export default function Product({ id }: any) {
                 price: data?.product?.price as number,
                 imgSrc: data?.product?.images[0].url as string,
                 id: id,
+                color: colorInput,
+                size: sizeInput,
               });
               setIsClick(true);
             }}

@@ -20,6 +20,8 @@ export default function Cart() {
                   index={index}
                   id={product.id}
                   quant={product.quant as number}
+                  color={product.color}
+                  size={product.size}
                 />
               ))}
             </>

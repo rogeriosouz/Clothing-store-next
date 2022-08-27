@@ -34,7 +34,7 @@ export function Header() {
                 </a>
               </Link>
             </div>
-            <div className="cursor-pointer absolute left-[84%]">
+            <div className="cursor-pointer absolute left-[96%]">
               <Link href={'/cart'}>
                 <div className="flex gap-2">
                   <AiOutlineShoppingCart fontSize={25} />
