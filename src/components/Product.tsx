@@ -9,7 +9,7 @@ type ProductProps = {
 
 export function Product({ name, price, imgSrc, id }: ProductProps) {
   return (
-    <div className=" m-auto w-[276px] min-h-[416px] bg-zinc-100 border border-zinc-300">
+    <div className=" m-auto w-[290px] min-h-[440px] bg-zinc-100 border border-zinc-300">
       <div className="w-full h-[319px] rounded-[17px] overflow-hidden bg-white">
         <img className="object-fill w-full h-full" src={imgSrc} alt="aa" />
       </div>

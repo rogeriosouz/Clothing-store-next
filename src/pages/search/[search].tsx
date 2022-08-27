@@ -32,7 +32,7 @@ export default function Sacher({ search }: any) {
             style={{
               letterSpacing: '0.345em',
             }}
-            className="text-xl h-screen flex items-center justify-center"
+            className="text-xl flex items-start mt-[500px] justify-center"
           >
             produto não encontrado
           </div>

@@ -1,12 +1,15 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
+import { ContainerRadio } from '../../components/ConteinerRadio';
 import { CartProps, ContextCartCreate } from '../../context/CartContext';
 import { ProductDocument, useProductQuery } from '../../generated/graphql';
 import { client, ssrCache } from '../../lib/urql';
 
 export default function Product({ id }: any) {
   const [isClick, setIsClick] = useState(false);
+  const [sizeInput, setSizeInput] = useState('');
+  const [colorInput, setColorInput] = useState('');
 
   const [{ data }] = useProductQuery({
     variables: {
@@ -38,6 +41,17 @@ export default function Product({ id }: any) {
     }
   });
 
+  let color = '';
+  let isIqualColor = false;
+  data?.product?.variants.map((item: any) => {
+    if (item.color === color) {
+      color = item.color;
+      isIqualColor = true;
+      return;
+    }
+    color = item.color;
+  });
+
   return (
     <section className="max-w-[1300px] h-screen flex items-start mt-[200px] m-auto justify-between">
       <div className="w-[690px] h-[490px] flex gap-4">
@@ -58,7 +72,7 @@ export default function Product({ id }: any) {
           />
         </div>
       </div>
-      <div className="w-[480px] h-[250px] flex flex-col justify-between">
+      <div className="w-[480px] min-h-min flex flex-col justify-between gap-6">
         <h1 className="text-center mt-[20px] font-bold text-2xl">
           {data?.product?.name}
         </h1>
@@ -68,11 +82,54 @@ export default function Product({ id }: any) {
           </span>
           <p className="text-[12px] font-semibold text-zinc-400"> x3 20,80</p>
         </div>
+        <div className="ml-[20px] mr-[20px] flex items-center justify-between">
+          <div>
+            <span className="font-bold  text-base">COLORS</span>
+          </div>
+          <div className="flex gap-2">
+            {!isIqualColor ? (
+              <>
+                {data?.product?.variants.map((item: any, index: number) => (
+                  <ContainerRadio
+                    key={index}
+                    onChange={setColorInput}
+                    color={color}
+                    name={'color'}
+                  />
+                ))}
+              </>
+            ) : (
+              <ContainerRadio
+                onChange={setColorInput}
+                color={color}
+                name={'color'}
+              />
+            )}
+          </div>
+        </div>
+
+        {data?.product?.categories[0].name !== 'Accessories' && (
+          <div className="ml-[20px] mr-[20px] flex items-center justify-between">
+            <div>
+              <span className="font-bold text-base">SIZE</span>
+            </div>
+            <div className="flex gap-2">
+              {data?.product?.variants.map((item: any, index: number) => (
+                <ContainerRadio
+                  key={index}
+                  onChange={setSizeInput}
+                  color={item.size}
+                  name={'size'}
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
         {isClick ? (
           <Link href={'/cart'}>
             <a>
-              <button className=" w-full h-[60px] bg-black text-white font-bold">
+              <button className=" w-full h-[60px] bg-black text-white font-bold ">
                 IR PARA O CARINHO
               </button>
             </a>

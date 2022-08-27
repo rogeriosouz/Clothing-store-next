@@ -10363,7 +10363,7 @@ export type ProductQueryVariables = Exact<{
 }>;
 
 
-export type ProductQuery = { __typename?: 'Query', product?: { __typename?: 'Product', name: string, price: number, variants: Array<{ __typename?: 'ProductColorVariant', name: string, color: ProductColor } | { __typename?: 'ProductSizeColorVariant' } | { __typename?: 'ProductSizeVariant', name: string, size: ProductSize }>, images: Array<{ __typename?: 'Asset', url: string }> } | null };
+export type ProductQuery = { __typename?: 'Query', product?: { __typename?: 'Product', name: string, price: number, variants: Array<{ __typename?: 'ProductColorVariant', name: string, color: ProductColor } | { __typename?: 'ProductSizeColorVariant', size: ProductSize, color: ProductColor, name: string } | { __typename?: 'ProductSizeVariant' }>, images: Array<{ __typename?: 'Asset', url: string }>, categories: Array<{ __typename?: 'Category', name: string }> } | null };
 
 export type SearchQueryVariables = Exact<{
   _search?: InputMaybe<Scalars['String']>;
@@ -10415,17 +10415,21 @@ export const ProductDocument = gql`
     name
     price
     variants {
+      ... on ProductSizeColorVariant {
+        size
+        color
+        name
+      }
       ... on ProductColorVariant {
         name
         color
       }
-      ... on ProductSizeVariant {
-        name
-        size
-      }
     }
     images {
       url
+    }
+    categories {
+      name
     }
   }
 }

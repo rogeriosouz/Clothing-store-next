@@ -3,6 +3,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import fundo from '../../public/fundo.png';
 import { ImgSlider } from './ImgsSlider';
 
 type ListFotosProps = {
@@ -11,7 +12,15 @@ type ListFotosProps = {
 
 export function Slider({ listFotos }: ListFotosProps) {
   return (
-    <section className="w-full h-[50vh] mt-[100px] pt-11">
+    <section
+      style={{
+        backgroundImage: `url(${fundo.src})`,
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+      }}
+      className="w-full h-[50vh] mt-[100px] pt-11 bg-zinc-700"
+    >
       <Swiper
         slidesPerView={1}
         spaceBetween={30}

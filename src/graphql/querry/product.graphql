@@ -3,17 +3,21 @@ query Product($id: ID = "") {
     name
     price
     variants {
+      ... on ProductSizeColorVariant {
+        size
+        color
+        name
+      }
       ... on ProductColorVariant {
         name
         color
       }
-      ... on ProductSizeVariant {
-        name
-        size
-      }
     }
     images {
       url
+    }
+    categories {
+      name
     }
   }
 }

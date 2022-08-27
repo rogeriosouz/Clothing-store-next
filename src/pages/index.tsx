@@ -18,12 +18,12 @@ export default function Home({ listFotos }: PropsHome) {
   return (
     <>
       <Slider listFotos={listFotos} />
-      <section className="w-full h-[10vh] mt-[90px] mb-[50px]">
+      <section className="w-full h-[10vh] mt-[60px] mb-[50px]">
         <div
           style={{
             letterSpacing: '0.305em',
           }}
-          className="sm:flex-row gap-6 flex-col sm:text-[16px] max-w-[1300px] h-[10vh] flex m-auto text-base justify-around text-black items-center"
+          className="sm:flex-row gap-6 flex-col sm:text-[16px] max-w-[1400px] h-[10vh] flex m-auto text-base justify-around text-black items-center"
         >
           <div className="flex">
             <div className="sm:max-w-[300px] flex max-w-[400px] items-center justify-center gap-3">
@@ -46,8 +46,8 @@ export default function Home({ listFotos }: PropsHome) {
         </div>
       </section>
       <section className="w-full min-h-screen">
-        <div className="max-w-[1100px] min-h-screen m-auto">
-          <div className="gap-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
+        <div className="max-w-[1300px] min-h-screen m-auto">
+          <div className="gap-y-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
             {data?.products.map((product) => (
               <Product
                 key={product.name}
