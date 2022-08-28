@@ -1,7 +1,9 @@
 import { GetServerSideProps } from 'next';
+import { useState } from 'react';
 import { AiFillCar } from 'react-icons/ai';
 import { BiWorld } from 'react-icons/bi';
 import { MdLocalOffer } from 'react-icons/md';
+import { ButtonPaginations } from '../components/ButtonsPagination';
 import { Product } from '../components/Product';
 import { Slider } from '../components/Slider';
 import { ProductsDocument, useProductsQuery } from '../generated/graphql';
@@ -14,6 +16,14 @@ type PropsHome = {
 
 export default function Home({ listFotos }: PropsHome) {
   const [{ data }] = useProductsQuery();
+  const [itensPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const pages = Math.ceil((data?.products.length as number) / itensPerPage);
+  const startItem = currentPage * itensPerPage;
+  const endIten = startItem + itensPerPage;
+
+  const productPagination = data?.products.slice(startItem, endIten);
 
   return (
     <>
@@ -45,10 +55,11 @@ export default function Home({ listFotos }: PropsHome) {
           </div>
         </div>
       </section>
+
       <section className="w-full min-h-screen">
         <div className="max-w-[1300px] min-h-screen m-auto">
           <div className="gap-y-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
-            {data?.products.map((product) => (
+            {productPagination?.map((product: any) => (
               <Product
                 key={product.name}
                 price={product.price}
@@ -59,6 +70,9 @@ export default function Home({ listFotos }: PropsHome) {
             ))}
           </div>
         </div>
+        {pages !== 1 && (
+          <ButtonPaginations pages={pages} setCurrentPage={setCurrentPage} />
+        )}
       </section>
     </>
   );
