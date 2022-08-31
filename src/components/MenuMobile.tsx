@@ -16,9 +16,9 @@ export function MenuMobile({ menuMobile, setMenuMobile }: MenuMobileProps) {
   return (
     <div
       className={classNames(
-        'sm:hidden w-full mt-[140px] bg-white fixed z-[2] top-0 h-[0px] transition-all',
+        'sm:hidden w-full mt-[140px] bg-white fixed z-[2] top-0  transition-all',
         {
-          'h-[200px] border-b': menuMobile,
+          'h-screen ': menuMobile,
           'h-[0px] overflow-hidden': !menuMobile,
         }
       )}
@@ -45,7 +45,7 @@ export function MenuMobile({ menuMobile, setMenuMobile }: MenuMobileProps) {
               letterSpacing: '0.300em',
             }}
             onClick={() => setMenuCategory(!menuCategory)}
-            className="w-full shadow-xl p-1 pl-3 rounded flex items-center justify-center cursor-pointer"
+            className="w-full p-1 pl-3 flex items-center justify-center cursor-pointer"
           >
             categorias
             {menuCategory ? (

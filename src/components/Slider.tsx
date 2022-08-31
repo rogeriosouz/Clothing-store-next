@@ -19,7 +19,7 @@ export function Slider({ listFotos }: ListFotosProps) {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
       }}
-      className="w-full h-[50vh] mt-[100px] pt-11 bg-zinc-700"
+      className="w-full h-[50vh] mt-[100px]  pt-11 bg-zinc-700"
     >
       <Swiper
         slidesPerView={1}

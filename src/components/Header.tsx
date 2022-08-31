@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { BiSearchAlt2 } from 'react-icons/bi';
 
 import { DiDojo } from 'react-icons/di';
 import { GoThreeBars, GoX } from 'react-icons/go';
@@ -9,13 +10,14 @@ import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 import { ContextCartCreate } from '../context/CartContext';
 import { useCategoriesQuery } from '../generated/graphql';
 import { MenuMobile } from './MenuMobile';
+import { MenuPesquisaMobile } from './MunuPesquisaMobile';
 import { Search } from './Search';
 
 export function Header() {
   const [menuMobile, setMenuMobile] = useState(false);
   const [category, setCategory] = useState(false);
   const { cart } = useContext(ContextCartCreate);
-
+  const [menuPesquisa, setMenuPesquisa] = useState(false);
   const [{ data }] = useCategoriesQuery();
 
   return (
@@ -34,7 +36,12 @@ export function Header() {
                 </a>
               </Link>
             </div>
-            <div className="cursor-pointer absolute left-[96%]">
+            <div
+              style={{
+                left: 'calc(100% - 50px)',
+              }}
+              className="cursor-pointer absolute sm:block hidden"
+            >
               <Link href={'/cart'}>
                 <div className="flex gap-2">
                   <AiOutlineShoppingCart fontSize={25} />
@@ -46,7 +53,7 @@ export function Header() {
           <div className="w-full flex items-center justify-between h-[40px] p-2">
             <div className="font-medium text-[15px] gap-10 hidden sm:flex items-center">
               <Link href={'/products'}>
-                <p className="transition-colors p-4 pl-5 pr-5 hover:bg-zinc-600 hover:text-white h-[34px] flex items-center font-medium text-xl cursor-pointer">
+                <p className="min-w-max transition-colors p-4 pl-5 pr-5 hover:bg-zinc-600 hover:text-white h-[34px] flex items-center font-medium text-xl cursor-pointer">
                   todos produtos
                 </p>
               </Link>
@@ -96,22 +103,47 @@ export function Header() {
                 </div>
               </div>
             </div>
-            <button
-              onClick={() => setMenuMobile(!menuMobile)}
-              className="cursor-pointer sm:hidden"
-            >
-              {menuMobile ? (
-                <GoX fontSize={30} />
-              ) : (
-                <GoThreeBars fontSize={30} />
-              )}
-            </button>
+            <div className="flex justify-between items-center w-full">
+              <button
+                onClick={() => {
+                  setMenuPesquisa(false);
+                  setMenuMobile(!menuMobile);
+                }}
+                className="cursor-pointer sm:hidden "
+              >
+                {menuMobile ? (
+                  <GoX fontSize={40} />
+                ) : (
+                  <GoThreeBars fontSize={40} />
+                )}
+              </button>
 
-            <Search />
+              <div className="sm:flex hidden w-full items-center justify-end">
+                <Search />
+              </div>
+
+              <div className="flex items-center gap-5 sm:hidden">
+                <button
+                  onClick={() => {
+                    setMenuMobile(false);
+                    setMenuPesquisa((e) => !e);
+                  }}
+                >
+                  <BiSearchAlt2 fontSize={30} />
+                </button>
+                <Link href={'/cart'}>
+                  <div className="flex items-center gap-2">
+                    <AiOutlineShoppingCart fontSize={30} />
+                    {cart.length}
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </header>
       <MenuMobile menuMobile={menuMobile} setMenuMobile={setMenuMobile} />
+      <MenuPesquisaMobile height={menuPesquisa} />
     </>
   );
 }

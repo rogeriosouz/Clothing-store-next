@@ -1,15 +1,40 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
-import { ContainerRadio } from '../../components/ConteinerRadio';
+
 import { CartProps, ContextCartCreate } from '../../context/CartContext';
 import { ProductDocument, useProductQuery } from '../../generated/graphql';
 import { client, ssrCache } from '../../lib/urql';
 
+const Select: any = dynamic(
+  () => import('react-select').then((mod: any) => mod.default),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
+
+function isEqualProduct(cart: CartProps[], id: string) {
+  let iqual = false;
+
+  cart.map((item) => {
+    if (item.id === id) {
+      iqual = true;
+    }
+  });
+
+  return iqual;
+}
+
 export default function Product({ id }: any) {
   const [isClick, setIsClick] = useState(false);
-  const [sizeInput, setSizeInput] = useState('');
-  const [colorInput, setColorInput] = useState('');
+  const [selectColor, setSelectColor] = useState('');
+  const [selectSize, setSelectSize] = useState('');
+  const [optionSize, setOptionSize] = useState([]);
+  const [optionColor, setOptionColor] = useState([]);
+  const [isIqualColor, setIsIqualColor] = useState(false);
+  const [uniquiColor, setUniquiCor] = useState('');
 
   const [{ data }] = useProductQuery({
     variables: {
@@ -18,18 +43,6 @@ export default function Product({ id }: any) {
   });
 
   const { addItemToCart, cart, editProduct } = useContext(ContextCartCreate);
-
-  function isEqualProduct(cart: CartProps[], id: string) {
-    let iqual = false;
-
-    cart.map((item) => {
-      if (item.id === id) {
-        iqual = true;
-      }
-    });
-
-    return iqual;
-  }
 
   useEffect(() => {
     const iqual = isEqualProduct(cart, id);
@@ -41,30 +54,52 @@ export default function Product({ id }: any) {
     }
   });
 
-  let color = '';
-  let isIqualColor = false;
-  data?.product?.variants.map((item: any) => {
-    if (item.color === color) {
-      color = item.color;
-      isIqualColor = true;
-      return;
+  useEffect(() => {
+    const isSize = data?.product?.categories[0].name !== 'Accessories';
+    const optSize: any = [];
+    const optColor: any = [];
+
+    if (isSize) {
+      data?.product?.variants.map((item: any) => {
+        optSize.push({ value: item.size, label: item.size });
+      });
+    } else {
+      data?.product?.variants.map((item: any) => {
+        optColor.push({ value: item.color, label: item.color });
+      });
     }
-    color = item.color;
-  });
+
+    let color = '';
+    let isIqualColor = false;
+    data?.product?.variants.map((item: any) => {
+      if (item.color === color) {
+        color = item.color;
+        isIqualColor = true;
+        return;
+      }
+      color = item.color;
+    });
+
+    setUniquiCor(color);
+    setIsIqualColor(isIqualColor);
+
+    setOptionSize(optSize);
+    setOptionColor(optColor);
+  }, [data]);
 
   return (
-    <section className="max-w-[1300px] h-screen flex items-start mt-[200px] m-auto justify-between">
-      <div className="w-[690px] h-[490px] flex gap-4">
-        <div className="w-[170px] h-full shadow-xl">
-          <div className="overflow-hidden w-full h-[150px] mt-[10px] mb-[10px] bg-white">
+    <section className="mb-[160px] laptop:flex-row flex-col max-w-[1300px] h-screen flex items-start mt-[200px] m-auto justify-between">
+      <div className="sm:w-[690px] w-full laptop:m-0 m-auto  h-[490px] flex sm:flex-row flex-col-reverse">
+        <div className="h-full sm:shadow-xl sm:w-[170px] w-full">
+          <div className="p-1 flex gap-2 overflow-hidden min-w-min sm:h-[150px] h-[90px] mt-[10px] mb-[10px] bg-white">
             <img
-              className="w-full h-full object-cover"
+              className="sm:border-none border-2 border-zinc-400 min-w-min h-full  sm:object-cover object-contain"
               src={data?.product?.images[0].url}
               alt={data?.product?.images[0].__typename}
             />
           </div>
         </div>
-        <div className="flex-1 h-full shadow-xl">
+        <div className="h-full shadow-xl">
           <img
             className="w-full h-full object-cover"
             src={data?.product?.images[0].url}
@@ -72,7 +107,7 @@ export default function Product({ id }: any) {
           />
         </div>
       </div>
-      <div className="w-[480px] min-h-min flex flex-col justify-between gap-6">
+      <div className="laptop:w-[480px] laptop:mt-0 mt-[30px] sm:p-5 p-0 laptop:p-0 w-full min-h-min flex flex-col justify-between gap-6">
         <h1 className="text-center mt-[20px] font-bold text-2xl">
           {data?.product?.name}
         </h1>
@@ -86,23 +121,18 @@ export default function Product({ id }: any) {
           <div>
             <span className="font-bold  text-base">COLORS</span>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             {!isIqualColor ? (
-              <>
-                {data?.product?.variants.map((item: any, index: number) => (
-                  <ContainerRadio
-                    key={index}
-                    onChange={setColorInput}
-                    color={color}
-                    name={'color'}
-                  />
-                ))}
-              </>
+              <Select
+                onChange={(e: any) => setSelectColor(e.value)}
+                className="w-[150px] border-zinc-500 outline-emerald-600"
+                options={optionColor}
+              />
             ) : (
-              <ContainerRadio
-                onChange={setColorInput}
-                color={color}
-                name={'color'}
+              <Select
+                onChange={(e: any) => setSelectColor(e.value)}
+                className="w-[150px] border-zinc-500 outline-emerald-600"
+                options={[{ value: uniquiColor, label: uniquiColor }]}
               />
             )}
           </div>
@@ -113,15 +143,12 @@ export default function Product({ id }: any) {
             <div>
               <span className="font-bold text-base">SIZE</span>
             </div>
-            <div className="flex gap-2">
-              {data?.product?.variants.map((item: any, index: number) => (
-                <ContainerRadio
-                  key={index}
-                  onChange={setSizeInput}
-                  color={item.size}
-                  name={'size'}
-                />
-              ))}
+            <div className="flex gap-1">
+              <Select
+                onChange={(e: any) => setSelectSize(e.value)}
+                className="w-[150px] text-black "
+                options={optionSize}
+              />
             </div>
           </div>
         )}
@@ -130,7 +157,7 @@ export default function Product({ id }: any) {
           <Link href={'/cart'}>
             <a>
               <button
-                onClick={() => editProduct(id, sizeInput, colorInput)}
+                onClick={() => editProduct(id, selectSize, selectColor)}
                 className=" w-full h-[60px] bg-black text-white font-bold "
               >
                 IR PARA O CARINHO
@@ -145,8 +172,8 @@ export default function Product({ id }: any) {
                 price: data?.product?.price as number,
                 imgSrc: data?.product?.images[0].url as string,
                 id: id,
-                color: colorInput,
-                size: sizeInput,
+                color: selectColor,
+                size: selectSize,
               });
               setIsClick(true);
             }}

@@ -7,7 +7,9 @@ import { client, ssrCache } from '../../lib/urql';
 
 export default function Products() {
   const [{ data }] = useProductsQuery();
+
   const [itensPerPage] = useState(10);
+
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = Math.ceil((data?.products.length as number) / itensPerPage);
@@ -20,7 +22,7 @@ export default function Products() {
     <section className="w-full min-h-screen mt-[190px]">
       <div className="max-w-[1300px] min-h-screen m-auto">
         <div className="gap-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
-          {productPagination?.map((product) => (
+          {productPagination?.map((product: any) => (
             <Product
               key={product.name}
               price={product.price}
