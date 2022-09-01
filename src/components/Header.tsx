@@ -61,21 +61,16 @@ export function Header() {
               <div className="relative z-10">
                 <button
                   onClick={() => setCategory(!category)}
-                  className={classNames(
-                    'border-black z-10 relative top-[1px] font-medium text-xl w-[150px] pl-[11px] bg-zinc-100 flex items-center cursor-pointer',
-                    {
-                      'border-b': !category,
-                    }
-                  )}
+                  className={
+                    'z-10 font-medium text-xl w-[150px] pl-[11px]  flex items-center cursor-pointer'
+                  }
                 >
                   categorias
-                  <div className="ml-[10px]">
-                    {category ? (
-                      <MdOutlineArrowDropUp fontSize={30} />
-                    ) : (
-                      <MdOutlineArrowDropDown fontSize={30} />
-                    )}
-                  </div>
+                  {category ? (
+                    <MdOutlineArrowDropUp fontSize={25} />
+                  ) : (
+                    <MdOutlineArrowDropDown fontSize={25} />
+                  )}
                 </button>
                 <div
                   className={classNames(

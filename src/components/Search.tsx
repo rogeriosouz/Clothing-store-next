@@ -15,7 +15,7 @@ export function Search() {
           letterSpacing: '0.300em',
         }}
         placeholder="pesquisa"
-        className="text-[15px] font-bold text-black transition-colors w-[140px] border-b border-black p-2 outline-none hover:border-zinc-400"
+        className="text-[15px] font-normal text-black transition-colors w-[140px] border-b border-black p-2 outline-none hover:border-zinc-400"
         type="search"
         onChange={(e) => setSearch(e.target.value)}
         value={search}

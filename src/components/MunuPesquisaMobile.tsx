@@ -24,7 +24,7 @@ export function MenuPesquisaMobile({ height }: PropsMenuPesquisa) {
     >
       <input
         className={classNames(
-          'rounded shadow-xl font-bold w-[80%] h-[50%] outline-none p-2 bg-zinc-300 text-black'
+          'shadow-xl font-normal w-[80%] h-[50%] outline-none p-2 border-b border-black text-black'
         )}
         placeholder="pesquisa"
         type="text"
@@ -32,7 +32,7 @@ export function MenuPesquisaMobile({ height }: PropsMenuPesquisa) {
       />
       <button
         disabled={inputActive}
-        className="disabled:text-zinc-500 text-black w-[40px] h-[48%] rounded flex items-center justify-center"
+        className="border-b border-black disabled:text-zinc-500 text-black w-[40px] h-[48%] flex items-center justify-center"
       >
         {inputActive ? (
           <div>
@@ -40,7 +40,9 @@ export function MenuPesquisaMobile({ height }: PropsMenuPesquisa) {
           </div>
         ) : (
           <Link href={`/search/${inputPesquisa}`}>
-            <BiSearchAlt2 fontSize={30} />
+            <a>
+              <BiSearchAlt2 fontSize={30} />
+            </a>
           </Link>
         )}
       </button>

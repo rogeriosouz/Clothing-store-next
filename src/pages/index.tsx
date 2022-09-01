@@ -28,7 +28,7 @@ export default function Home({ listFotos }: PropsHome) {
   return (
     <>
       <Slider listFotos={listFotos} />
-      <section className="w-full h-[10vh] mt-[60px] mb-[50px]">
+      <section className="sm:block hidden w-full h-[10vh] mt-[60px] mb-[50px]">
         <div
           style={{
             letterSpacing: '0.305em',
@@ -56,7 +56,7 @@ export default function Home({ listFotos }: PropsHome) {
         </div>
       </section>
 
-      <section className="w-full min-h-screen">
+      <section className="w-full min-h-screen sm:mt-0 mt-[70px]">
         <div className="max-w-[1300px] min-h-screen m-auto">
           <div className="gap-y-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
             {productPagination?.map((product: any) => (
