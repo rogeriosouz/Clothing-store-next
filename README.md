@@ -8,12 +8,10 @@
 
 
 
-
-
 <h2 align="center">MOBILE</h2>
 
 <p align="center">
-  <img width="350"  height="550" src="https://user-images.githubusercontent.com/76504596/185729539-c5cae107-4981-4d8e-bd95-47749f71dce7.png">
+  <img width="350"  height="550" src="https://user-images.githubusercontent.com/76504596/187616754-656935b2-12f5-4d6b-996a-1e486c891b05.png">
 </p>
 
 **🛠️ BUILT WITH**
