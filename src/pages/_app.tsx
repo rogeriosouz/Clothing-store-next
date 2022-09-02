@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app';
+import NextNProgress from 'nextjs-progressbar';
 import { Provider } from 'urql';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
@@ -13,6 +14,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Provider value={client}>
+      <NextNProgress
+        color="#000"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={3}
+        showOnShallow={true}
+      />
       <CartContext>
         <Header />
         <main className="font-Mulish w-full h-scren">

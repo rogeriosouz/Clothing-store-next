@@ -70,9 +70,11 @@ export function CartComponent({
         </div>
         <div className="sm:flex hidden w-full h-[20px] bg-white mb-[10px] items-center justify-end">
           <div className="sm:flex hidden items-center justify-start w-full pl-4 gap-2 text-white">
-            {size && <p className="text-sm bg-zinc-600  ">TM: {size}</p>}
+            {size && <p className="text-sm bg-zinc-600">TM: {size}</p>}
 
-            <span className="text-sm bg-zinc-600">COR: {color}</span>
+            <span className="text-sm bg-zinc-600 min-w-min pl-2 pr-2 pb-[1px] pt-[1px]">
+              COR: {color}
+            </span>
           </div>
           <div className="flex items-center pr-4 gap-2">
             <button className="bg-zinc-600" onClick={() => addQuantCart(id)}>
