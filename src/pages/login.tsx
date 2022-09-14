@@ -1,4 +1,11 @@
+import { GetServerSideProps } from 'next';
+import { getSession, signIn } from 'next-auth/react';
+
 export default function Login() {
+  function singIngGitHub() {
+    signIn('github');
+  }
+
   return (
     <section className="w-full h-screen flex items-center justify-center mt-[80px]">
       <div
@@ -37,9 +44,14 @@ export default function Login() {
               logar
             </button>
           </div>
-          <div className="flex gap-2 w-full h-[40px] justify-around p-2 ">
+          <div className="flex w-full h-[40px] justify-around p-[1px]">
             <button className="transition-colors sm:hover:bg-zinc-600 bg-black w-[30%] h-[40px] rounded"></button>
-            <button className="transition-colors sm:hover:bg-zinc-600 bg-black w-[30%] h-[40px] rounded"></button>
+            <button
+              onClick={singIngGitHub}
+              className="transition-colors sm:hover:bg-zinc-600 bg-black w-[30%] h-[40px] rounded"
+            >
+              gitHub
+            </button>
             <button className="transition-colors sm:hover:bg-zinc-600 bg-black w-[30%] h-[40px] rounded"></button>
           </div>
         </div>
@@ -47,3 +59,20 @@ export default function Login() {
     </section>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+
+  if (session?.user) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

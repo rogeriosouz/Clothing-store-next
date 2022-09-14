@@ -4,7 +4,6 @@ import { useContext, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { BiSearchAlt2 } from 'react-icons/bi';
 
-import { DiDojo } from 'react-icons/di';
 import { GoThreeBars, GoX } from 'react-icons/go';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 import { ContextCartCreate } from '../context/CartContext';
@@ -31,9 +30,7 @@ export function Header() {
           <div className="w-full flex items-center justify-center relative mt-[20px] mb-[20px] h-[40px] p-2">
             <div className="cursor-pointer">
               <Link href={'/'}>
-                <a>
-                  <DiDojo fontSize={50} />
-                </a>
+                <a className="font-bold text-2xl">LOGO</a>
               </Link>
             </div>
             <div

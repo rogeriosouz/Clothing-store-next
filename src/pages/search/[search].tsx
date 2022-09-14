@@ -11,6 +11,7 @@ export default function Sacher({ search }: any) {
       _search: search,
     },
   });
+
   const [itensPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
 
