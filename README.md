@@ -11,8 +11,9 @@
 <h2 align="center">MOBILE</h2>
 
 <p align="center">
-  <img width="350"  height="550" src="https://user-images.githubusercontent.com/76504596/187616754-656935b2-12f5-4d6b-996a-1e486c891b05.png">
+  <img width="350"  height="550" src="https://user-images.githubusercontent.com/76504596/190250844-0154e93e-262f-4177-83bf-b2f1604a5926.png">
 </p>
+
 
 **🛠️ BUILT WITH**
 
@@ -54,3 +55,4 @@
   # Start the project
   ❯ npm start
 ```
+
