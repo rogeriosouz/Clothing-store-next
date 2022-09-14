@@ -11,7 +11,7 @@
 <h2 align="center">MOBILE</h2>
 
 <p align="center">
-  <img width="350"  height="550" src="https://user-images.githubusercontent.com/76504596/190250844-0154e93e-262f-4177-83bf-b2f1604a5926.png">
+  <img width="350"  height="556" src="https://user-images.githubusercontent.com/76504596/190250844-0154e93e-262f-4177-83bf-b2f1604a5926.png">
 </p>
 
 
