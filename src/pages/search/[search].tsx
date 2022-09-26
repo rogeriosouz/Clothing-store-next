@@ -8,7 +8,7 @@ import { client, ssrCache } from '../../lib/urql';
 export default function Sacher({ search }: any) {
   const [{ data }] = useSearchQuery({
     variables: {
-      _search: search,
+      name_contains: search,
     },
   });
 
@@ -52,7 +52,9 @@ export default function Sacher({ search }: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  await client.query(SearchDocument, { _search: params?.search }).toPromise();
+  await client
+    .query(SearchDocument, { name_contains: params?.search })
+    .toPromise();
 
   return {
     props: {

@@ -51,7 +51,7 @@ export function Header() {
             <div className="font-medium text-[15px] gap-10 hidden sm:flex items-center">
               <Link href={'/products'}>
                 <p className="min-w-max transition-colors p-4 pl-5 pr-5 hover:bg-zinc-600 hover:text-white h-[34px] flex items-center font-medium text-xl cursor-pointer">
-                  todos produtos
+                  Todos produtos
                 </p>
               </Link>
 

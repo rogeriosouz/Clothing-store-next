@@ -1,5 +1,5 @@
-query Search($_search: String = "mug") {
-  products(where: { _search: $_search }) {
+query Search($name_contains: String = "zip") {
+  products(where: { name_contains: $name_contains }) {
     id
     name
     images {
