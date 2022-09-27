@@ -10665,6 +10665,7 @@ export type CategoriesQuery = { __typename?: 'Query', categories: Array<{ __type
 
 export type CategoryQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
+  orderBy?: InputMaybe<ProductOrderByInput>;
 }>;
 
 
@@ -10679,12 +10680,15 @@ export type ProductQuery = { __typename?: 'Query', product?: { __typename?: 'Pro
 
 export type SearchQueryVariables = Exact<{
   name_contains?: InputMaybe<Scalars['String']>;
+  orderBy?: InputMaybe<ProductOrderByInput>;
 }>;
 
 
 export type SearchQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, price: number, images: Array<{ __typename?: 'Asset', url: string }> }> };
 
-export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProductsQueryVariables = Exact<{
+  orderBy?: InputMaybe<ProductOrderByInput>;
+}>;
 
 
 export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, price: number, images: Array<{ __typename?: 'Asset', url: string }> }> };
@@ -10703,10 +10707,10 @@ export function useCategoriesQuery(options?: Omit<Urql.UseQueryArgs<CategoriesQu
   return Urql.useQuery<CategoriesQuery, CategoriesQueryVariables>({ query: CategoriesDocument, ...options });
 };
 export const CategoryDocument = gql`
-    query Category($id: ID = "") {
+    query Category($id: ID = "", $orderBy: ProductOrderByInput = publishedAt_ASC) {
   category(where: {id: $id}) {
     name
-    products {
+    products(orderBy: $orderBy) {
       id
       name
       price
@@ -10751,8 +10755,8 @@ export function useProductQuery(options?: Omit<Urql.UseQueryArgs<ProductQueryVar
   return Urql.useQuery<ProductQuery, ProductQueryVariables>({ query: ProductDocument, ...options });
 };
 export const SearchDocument = gql`
-    query Search($name_contains: String = "zip") {
-  products(where: {name_contains: $name_contains}) {
+    query Search($name_contains: String = "zip", $orderBy: ProductOrderByInput = publishedAt_ASC) {
+  products(where: {name_contains: $name_contains}, orderBy: $orderBy) {
     id
     name
     images {
@@ -10767,8 +10771,8 @@ export function useSearchQuery(options?: Omit<Urql.UseQueryArgs<SearchQueryVaria
   return Urql.useQuery<SearchQuery, SearchQueryVariables>({ query: SearchDocument, ...options });
 };
 export const ProductsDocument = gql`
-    query Products {
-  products {
+    query Products($orderBy: ProductOrderByInput = price_ASC) {
+  products(orderBy: $orderBy) {
     id
     name
     price

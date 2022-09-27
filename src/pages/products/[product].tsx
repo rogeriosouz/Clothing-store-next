@@ -87,6 +87,8 @@ export default function Product({ id }: any) {
     setOptionColor(optColor);
   }, [data]);
 
+  console.log(optionSize);
+
   return (
     <section className="mb-[160px] laptop:flex-row flex-col max-w-[1300px] h-screen flex items-start mt-[200px] m-auto justify-between">
       <div className="sm:w-[690px] w-full laptop:m-0 m-auto  h-[490px] flex sm:flex-row flex-col-reverse">

@@ -1,0 +1,13 @@
+query Search(
+  $name_contains: String = "zip"
+  $orderBy: ProductOrderByInput = publishedAt_ASC
+) {
+  products(where: { name_contains: $name_contains }, orderBy: $orderBy) {
+    id
+    name
+    images {
+      url
+    }
+    price
+  }
+}

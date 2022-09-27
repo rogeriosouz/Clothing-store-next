@@ -1,5 +1,5 @@
-query Products {
-  products {
+query Products($orderBy: ProductOrderByInput = price_ASC) {
+  products(orderBy: $orderBy) {
     id
     name
     price
