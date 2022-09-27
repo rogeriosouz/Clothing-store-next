@@ -24,10 +24,18 @@ type PropsHome = {
 export default function Home({ listFotos }: PropsHome) {
   const [ordenProducts, setOrdenProducts] = useState<ProductOrderByInput>();
   const [selecFilter, setSelecFilter] = useState('');
+  const [itensPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const [{ data }] = useProductsQuery({
     variables: { orderBy: ordenProducts },
   });
+
+  const pages = Math.ceil((data?.products.length as number) / itensPerPage);
+  const startItem = currentPage * itensPerPage;
+  const endIten = startItem + itensPerPage;
+
+  const productPagination = data?.products.slice(startItem, endIten);
 
   useEffect(() => {
     if (selecFilter === 'menor') {
@@ -37,15 +45,6 @@ export default function Home({ listFotos }: PropsHome) {
       setOrdenProducts(ProductOrderByInput.PriceDesc);
     }
   }, [selecFilter]);
-
-  const [itensPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const pages = Math.ceil((data?.products.length as number) / itensPerPage);
-  const startItem = currentPage * itensPerPage;
-  const endIten = startItem + itensPerPage;
-
-  const productPagination = data?.products.slice(startItem, endIten);
 
   return (
     <>
@@ -88,6 +87,7 @@ export default function Home({ listFotos }: PropsHome) {
             </Select>
           </div>
         </div>
+
         <div className="max-w-[1300px] min-h-screen m-auto">
           <div className="gap-y-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
             {productPagination?.map((product: any) => (

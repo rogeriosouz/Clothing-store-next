@@ -13,6 +13,8 @@ import { client, ssrCache } from '../../lib/urql';
 export default function Category({ category }: any) {
   const [ordenProducts, setOrdenProducts] = useState<ProductOrderByInput>();
   const [selecFilter, setSelecFilter] = useState('');
+  const [itensPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const [{ data }] = useCategoryQuery({
     variables: {
@@ -20,6 +22,14 @@ export default function Category({ category }: any) {
       orderBy: ordenProducts,
     },
   });
+
+  const pages = Math.ceil(
+    (data?.category?.products.length as number) / itensPerPage
+  );
+  const startItem = currentPage * itensPerPage;
+  const endIten = startItem + itensPerPage;
+
+  const productPagination = data?.category?.products.slice(startItem, endIten);
 
   useEffect(() => {
     if (selecFilter === 'menor') {
@@ -29,17 +39,6 @@ export default function Category({ category }: any) {
       setOrdenProducts(ProductOrderByInput.PriceDesc);
     }
   }, [selecFilter]);
-
-  const [itensPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const pages = Math.ceil(
-    (data?.category?.products.length as number) / itensPerPage
-  );
-  const startItem = currentPage * itensPerPage;
-  const endIten = startItem + itensPerPage;
-
-  const productPagination = data?.category?.products.slice(startItem, endIten);
 
   return (
     <section className="w-full min-h-screen mt-[190px]">

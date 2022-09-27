@@ -13,6 +13,8 @@ import { client, ssrCache } from '../../lib/urql';
 export default function Sacher({ search }: any) {
   const [ordenProducts, setOrdenProducts] = useState<ProductOrderByInput>();
   const [selecFilter, setSelecFilter] = useState('');
+  const [itensPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const [{ data }] = useSearchQuery({
     variables: {
@@ -20,6 +22,12 @@ export default function Sacher({ search }: any) {
       orderBy: ordenProducts,
     },
   });
+
+  const pages = Math.ceil((data?.products.length as number) / itensPerPage);
+  const startItem = currentPage * itensPerPage;
+  const endIten = startItem + itensPerPage;
+
+  const productPagination = data?.products.slice(startItem, endIten);
 
   useEffect(() => {
     if (selecFilter === 'menor') {
@@ -30,47 +38,38 @@ export default function Sacher({ search }: any) {
     }
   }, [selecFilter]);
 
-  const [itensPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const pages = Math.ceil((data?.products.length as number) / itensPerPage);
-  const startItem = currentPage * itensPerPage;
-  const endIten = startItem + itensPerPage;
-
-  const productPagination = data?.products.slice(startItem, endIten);
-
   return (
     <section className="w-full min-h-screen mt-[190px]">
-      <div className="max-w-[1300px] m-auto mb-4 flex items-center justify-end px-5">
-        <div className="rounded bg-zinc-700 min-w-min flex gap-2 items-center pl-2">
-          <p className="font-semibold text-lg text-white">filtrar:</p>
-          <Select onChange={(e) => setSelecFilter(e.target.value)}>
-            <option value="menor">Menor preço</option>
-            <option value="maior">Maior preço</option>
-          </Select>
-        </div>
-      </div>
-      <div className="max-w-[1300px] min-h-screen m-auto">
-        {data?.products.length ? (
-          <>
-            <div className="gap-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
-              {productPagination?.map((product) => (
-                <Product
-                  key={product.id}
-                  price={product.price}
-                  name={product.name}
-                  imgSrc={product.images[0].url}
-                  id={product.id}
-                />
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="font-normal text-xl flex items-start mt-[500px] justify-center">
-            produto não encontrado
+      {data?.products.length && (
+        <div className="max-w-[1300px] m-auto mb-4 flex items-center justify-end px-5">
+          <div className="rounded bg-zinc-700 min-w-min flex gap-2 items-center pl-2">
+            <p className="font-semibold text-lg text-white">filtrar:</p>
+            <Select onChange={(e) => setSelecFilter(e.target.value)}>
+              <option value="menor">Menor preço</option>
+              <option value="maior">Maior preço</option>
+            </Select>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+      {data?.products.length ? (
+        <div className="max-w-[1300px] min-h-screen m-auto">
+          <div className="gap-10 grid cell:grid-cols-1 sm:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
+            {productPagination?.map((product) => (
+              <Product
+                key={product.id}
+                price={product.price}
+                name={product.name}
+                imgSrc={product.images[0].url}
+                id={product.id}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="font-normal text-xl flex items-start mt-[140px] h-full justify-center">
+          produto não encontrado
+        </div>
+      )}
       {pages !== 1 && (
         <ButtonPaginations pages={pages} setCurrentPage={setCurrentPage} />
       )}
