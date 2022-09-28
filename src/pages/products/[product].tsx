@@ -109,7 +109,7 @@ export default function Product({ id }: any) {
           />
         </div>
       </div>
-      <div className="laptop:w-[480px] laptop:mt-0 mt-[30px] sm:p-5 p-0 laptop:p-0 w-full min-h-min flex flex-col justify-between gap-6">
+      <div className="laptop:w-[480px] px-2 laptop:mt-0 sm:p-5 p-0 laptop:p-0 w-full min-h-min flex flex-col justify-between gap-6">
         <h1 className="text-center mt-[20px] font-bold text-2xl">
           {data?.product?.name}
         </h1>
