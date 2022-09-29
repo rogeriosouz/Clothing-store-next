@@ -7,7 +7,8 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 export function Select({ children, ...rest }: SelectProps) {
   return (
     <select
-      className="rounded cursor-pointer hover:border-slate-500 bg-zinc-700 text-white  min-w-min px-3  border border-slate-700 outline-none"
+      style={{ WebkitAppearance: 'none', MozAppearance: 'none' }}
+      className="transition-colors  rounded-[1px] hover:bg-[#000000ad] hover:text-white cursor-pointer hover:border-zinc-700 bg-[#ffffffce] text-black font-semibold text-base w-[130px] border-[2px] border-zinc-700 text-center px-3 outline-none"
       {...rest}
     >
       {children}

@@ -1,18 +1,16 @@
+import { AiFillGithub } from 'react-icons/ai';
+
 export function Footer() {
   return (
-    <footer className="w-full h-[80px] mt-[90px] bg-zinc-800">
-      <div className="text-white  sm:max-w-[700px] max-w-[300px] w-[300px] sm:text-center text-center text-[14px] mb-[20px] mt-[12px] font-medium  m-auto h-full flex flex-col items-center justify-center">
-        <p className="font-bold">Feito por: rogerio pereira</p>
-        <span className="font-bold">
-          Github:{' '}
-          <a
-            target={'_blank'}
-            className="hover:underline"
-            href="https://github.com/rogeriosouz"
-          >
-            https://github.com/rogeriosouz
-          </a>
-        </span>
+    <footer className="w-full h-[96px] mt-[90px] bg-zinc-800">
+      <div className="max-w-[1440px] h-full flex sm:px-[136px] px-3 items-center justify-between mx-auto">
+        <p className="font-semibold text-base  text-white">Rogerio</p>
+
+        <h2 className="font-bold  sm:text-2xl text-xl text-white">Logo</h2>
+
+        <a href="https://github.com/rogeriosouz" target={'_blank'}>
+          <AiFillGithub className="  sm:text-[40px] text-[30px]" color="#fff" />
+        </a>
       </div>
     </footer>
   );

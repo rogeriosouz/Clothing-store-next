@@ -38,8 +38,8 @@ export default function Products() {
   return (
     <section className="w-full min-h-screen mt-[190px]">
       <div className="max-w-[1300px] m-auto mb-4 flex items-center justify-end px-5">
-        <div className="rounded bg-zinc-700 min-w-min flex gap-2 items-center pl-2">
-          <p className="font-semibold text-lg text-white">filtrar:</p>
+        <div className="min-w-min flex gap-2 items-center pl-2">
+          <p className="text-black font-semibold text-lg">Filtrar:</p>
           <Select onChange={(e) => setSelecFilter(e.target.value)}>
             <option value="menor">Menor preço</option>
             <option value="maior">Maior preço</option>
