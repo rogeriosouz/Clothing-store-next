@@ -10,9 +10,9 @@
 <h2 align="center">MOBILE</h2>
 
 <p align="center">
-  <img width="307"  height="576" src="https://user-images.githubusercontent.com/76504596/192877364-d1ad6501-4f0c-4f9a-96bb-a7b661654f31.png">
-  <img width="307"  height="576" src="https://user-images.githubusercontent.com/76504596/192876474-cfa7f679-185a-4b87-94ed-00110b10dd09.png">
-  <img width="307"  height="576" src="https://user-images.githubusercontent.com/76504596/192876624-b9c51974-691f-4d60-9dde-e7fe6e6caad4.png">
+  <img width="300"  height="576" src="https://user-images.githubusercontent.com/76504596/192877364-d1ad6501-4f0c-4f9a-96bb-a7b661654f31.png">
+  <img width="300"  height="576" src="https://user-images.githubusercontent.com/76504596/192876474-cfa7f679-185a-4b87-94ed-00110b10dd09.png">
+  <img width="300"  height="576" src="https://user-images.githubusercontent.com/76504596/192876624-b9c51974-691f-4d60-9dde-e7fe6e6caad4.png">
 </p>
 
 
